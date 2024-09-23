@@ -1,37 +1,53 @@
 package com.lssl.medical.config;
 
-import com.lssl.medical.intereception.JwtInterceptor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
+
 @Configuration
 public class WebConfig implements  WebMvcConfigurer {
-    @Autowired
-    private JwtInterceptor jwtInterceptor;
 
-    @Override
-    public void configurePathMatch(PathMatchConfigurer configurer) {
-        // 指定controller统一的接口前缀
-        configurer.addPathPrefix("/api",
-                clazz -> clazz.isAnnotationPresent(RestController.class));
-    }
+    // @Override
+    // public void configurePathMatch(PathMatchConfigurer configurer) {
+    //     // 指定controller统一的接口前缀
+    //     configurer.addPathPrefix("/api",
+    //             clazz -> clazz.isAnnotationPresent(RestController.class));
+    // }
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         //添加默认的静态资源访问路径
         registry.addResourceHandler("images/**")
                 .addResourceLocations("file:D:/WebProjects/images/");
     }
-    // 加自定义拦截器JwtInterceptor，设置拦截规则
+
+    /**
+     * 设置响应头的时间为GMT+8
+     * @param registry
+     */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(jwtInterceptor).
-                addPathPatterns("/api/**").
-                excludePathPatterns("/api/admin/login")
-                .excludePathPatterns("/api/userInfo/**");
+        registry.addInterceptor(new HandlerInterceptor() {
+            @Override
+            public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+                response.setHeader("date", String.valueOf(new Date()));
+                return true;
+            }
+        }).addPathPatterns("/**");
+    }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOriginPatterns("*")
+                .allowedMethods("*")
+                .allowedHeaders("*")
+                .maxAge(3600);
     }
 
 
