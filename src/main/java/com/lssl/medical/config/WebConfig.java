@@ -4,7 +4,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,11 +19,7 @@ public class WebConfig implements  WebMvcConfigurer {
     //     configurer.addPathPrefix("/api",
     //             clazz -> clazz.isAnnotationPresent(RestController.class));
     // }
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        //添加默认的静态资源访问路径
-        registry.addResourceHandler("images/**")
-                .addResourceLocations("file:D:/WebProjects/images/");
-    }
+
 
     /**
      * 设置响应头的时间为GMT+8
@@ -40,7 +35,6 @@ public class WebConfig implements  WebMvcConfigurer {
             }
         }).addPathPatterns("/**");
     }
-
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
@@ -49,6 +43,4 @@ public class WebConfig implements  WebMvcConfigurer {
                 .allowedHeaders("*")
                 .maxAge(3600);
     }
-
-
 }

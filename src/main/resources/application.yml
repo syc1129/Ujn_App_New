@@ -16,9 +16,10 @@ spring:
   #数据库配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/school?serverTimezone=GMT%2b8
+    url: jdbc:mysql://localhost:3306/medical?serverTimezone=GMT%2b8
     username: root
     password: mysql123
+
   #文件传输配置
   servlet:
     multipart:
@@ -43,3 +44,8 @@ mybatis:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
 
+#pageHelper分页插件配置
+pagehelper:
+  page-size-zero: true
+  reasonable: true
+  helper-dialect: mysql
