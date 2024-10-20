@@ -33,7 +33,6 @@ public class DoctorService {
     @Autowired
     private AccountMapper accountMapper;
     public Msg getDoctorWithPage(DoctorVo param) {
-        log.info("111");
         if (param.getSize() == 0) {
             param.setSize(1);
         }

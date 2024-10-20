@@ -69,7 +69,6 @@ public class DoctorController {
     @RolesAllowed({"1"})
     @DeleteMapping("{id}")
     public Msg deleteDoctor(@PathVariable("id") Long id) {
-
         return doctorService.deleteDoctorById(id);
     }
 

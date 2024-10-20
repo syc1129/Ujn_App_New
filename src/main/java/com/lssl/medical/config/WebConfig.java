@@ -20,7 +20,6 @@ public class WebConfig implements  WebMvcConfigurer {
     //             clazz -> clazz.isAnnotationPresent(RestController.class));
     // }
 
-
     /**
      * 设置响应头的时间为GMT+8
      * @param registry
