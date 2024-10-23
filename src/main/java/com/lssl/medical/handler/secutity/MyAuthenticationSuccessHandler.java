@@ -5,6 +5,7 @@ import com.lssl.medical.bean.Msg;
 import com.lssl.medical.dto.AccountDTO;
 import com.lssl.medical.dto.AccountInfoDTO;
 import com.lssl.medical.util.JwtUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -23,6 +24,7 @@ import java.util.HashMap;
  * @Description
  */
 @Component
+@Slf4j
 public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
@@ -37,6 +39,8 @@ public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHand
         HashMap<String,Object> map = new HashMap<String,Object>();
         map.put("token",jwtToken);
         map.put("userInfo", info1);
+        log.info("token",jwtToken);
+        log.info("userInfo", info1);
         response.getWriter().write(new ObjectMapper().writeValueAsString(Msg.success().mess("登陆成功").data("token",jwtToken).data("userInfo", info1)));
     }
 }

@@ -26,6 +26,7 @@ public class MyAuthenticationFailHandler implements AuthenticationFailureHandler
         log.info("MyAuthenticationFailHandler.request: "+request);
         log.info("MyAuthenticationFailHandler.response: "+response);
         response.setContentType("text/json;charset=utf-8");
+        log.info("用户名或密码错误");
         response.getWriter().write(new ObjectMapper().writeValueAsString(Msg.fail().mess("用户名或密码错误")));
     }
 }

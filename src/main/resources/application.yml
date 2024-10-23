@@ -16,9 +16,9 @@ spring:
   #数据库配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/medical?serverTimezone=GMT%2b8
+    url: jdbc:mysql://59.110.236.97:3306/medical?serverTimezone=GMT%2b8
     username: root
-    password: mysql123
+    password: 221nb666
 
   #文件传输配置
   servlet:
@@ -29,6 +29,10 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+    static-path-pattern: /image/**
+  web:
+    resources:
+      static-locations: file:D:\WebProjects\images\medical
   security:
     basic:
       path: /swagger-ui.html

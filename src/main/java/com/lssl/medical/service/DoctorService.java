@@ -98,7 +98,7 @@ public class DoctorService {
         }
         Account ae = new Account();
         ae.setId(param.getAccountId());
-        System.out.println(param.getAccountId());
+        log.info("accountID",param.getAccountId());
         ae.setUpdatetime(new DateTime().toDate());
         ae.setUname(param.getName()+param.getPhoneNumber().substring(7));
         ae.setPhoneNumber(param.getPhoneNumber());

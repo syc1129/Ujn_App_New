@@ -39,26 +39,26 @@ public class DoctorController {
     }
     /**
      * 新增医师信息
-     * @param param
+     * @doctorVo doctorVo
      * @return
      */
     @RolesAllowed({"1","2"})
     @PostMapping(value = "")
-    public Msg saveDoctor(@RequestBody @Validated DoctorVo param) {
-        return doctorService.saveDoctor(param);
+    public Msg saveDoctor(@RequestBody @Validated DoctorVo doctorVo){
+        return doctorService.saveDoctor(doctorVo);
     }
 
 
 
     /**
      * 修改医师信息
-     * @param param
+     * @doctorVo doctorVo
      * @return
      */
     @RolesAllowed({"1"})
     @PutMapping("/{id}")
-        public Msg updateDoctor(@PathVariable("id") Long id, @RequestBody DoctorVo param) {
-        return doctorService.updateDoctor(id, param);
+        public Msg updateDoctor(@PathVariable("id") Long id, @RequestBody DoctorVo doctorVo) {
+        return doctorService.updateDoctor(id, doctorVo);
     }
 
     /**

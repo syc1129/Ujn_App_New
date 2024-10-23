@@ -2,6 +2,7 @@ package com.lssl.medical.handler.secutity;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lssl.medical.bean.Msg;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
@@ -18,10 +19,12 @@ import java.io.IOException;
  * @Description
  */
 @Component
+@Slf4j
 public class CustomizeAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
         response.setContentType("text/json;charset=utf-8");
+        log.info("未登录或登录失效");
         response.getWriter().write(new ObjectMapper().writeValueAsString(Msg.fail().mess("未登录或登录失效").code(10006)));
     }
 
