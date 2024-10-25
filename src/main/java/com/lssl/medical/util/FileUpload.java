@@ -23,7 +23,7 @@ public class FileUpload {
         try {
             inputStream = file.getInputStream();
             fileName = UUID.randomUUID()+file.getOriginalFilename();
-            String path = "C:/Users/dell/Pictures/medical";
+            String path = "file:D:\\images\\medical";
             byte[] bs = new byte[1024];
             File tmpFile=new File(path);
             if (!tmpFile.exists()) {
