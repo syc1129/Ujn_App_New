@@ -1,6 +1,6 @@
 #端口配置
 server:
-  port: 8080
+  port: 9090
   max-http-header-size: 102400
 
 #日志配置

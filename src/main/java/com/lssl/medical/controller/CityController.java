@@ -8,6 +8,8 @@ import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
+
 /**
  * @author : 黑渊白花
  * @ClassName CityController
@@ -34,6 +36,22 @@ public class CityController {
     @GetMapping("{id}")
     public Msg getCityById(@PathVariable("id") Integer id) {
         Msg msg = cityService.getCityById(id);
+        return msg;
+    }
+
+    @RolesAllowed({"1"})
+    @PostMapping(value = "")
+    public Msg saveCity(Integer cityNumber) {
+        if (cityService.checkCityByName(cityNumber) > 0) {
+            return Msg.fail().mess("城市已经存在").code(10004);
+        }
+        return cityService.saveCity(cityNumber);
+    }
+
+    @RolesAllowed({"1"})
+    @DeleteMapping("{id}")
+    public Msg deleteSaleById(@PathVariable("id") Integer id) {
+        Msg msg = cityService.deleteCityById(id);
         return msg;
     }
 
