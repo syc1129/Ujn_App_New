@@ -40,6 +40,11 @@
     <select id="getAllTreatType" resultType="com.lssl.medical.dto.TreatTypeDTO">
         select id,name from `treat_type`
     </select>
+
+    <select id="getDoctorById" resultType="com.lssl.medical.entity.Doctor">
+        select phoneNumber from `doctor` where id=#{id}
+    </select>
+
     <!--添加医师信息-->
     <insert id="saveDoctor">
         insert into `doctor`(name,age,sex,level_id,phoneNumber,account_id,type_id,createtime,updatetime)

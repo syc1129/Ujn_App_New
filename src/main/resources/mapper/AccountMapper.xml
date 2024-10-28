@@ -38,7 +38,7 @@
 
     <!--检查手机号-->
     <select id="checkPhone" resultType="int">
-        select count(id) from `doctor` where phoneNumber=#{phoneNumber} limit 1
+        select count(id) from `doctor` where phoneNumber=#{phoneNumber} limit 2
     </select>
 
     <!--更新账户信息-->

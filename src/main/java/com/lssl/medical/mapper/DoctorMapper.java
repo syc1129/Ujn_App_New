@@ -29,5 +29,7 @@ public interface DoctorMapper {
     /*根据id删除医师*/
     int deleteDoctorById(Long id);
 
+    Doctor getDoctorById(Long id);
+
 
 }

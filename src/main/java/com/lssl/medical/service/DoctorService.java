@@ -93,7 +93,12 @@ public class DoctorService {
      */
     public Msg updateDoctor(Long id, DoctorVo param) {
         int checkPhone = accountMapper.checkPhone(param.getPhoneNumber());
-        if (checkPhone > 0) {
+        Doctor xDdoctor = doctorMapper.getDoctorById(id);
+        String xPhone = xDdoctor.getPhoneNumber();
+        if(param.getPhoneNumber().equals(xPhone)){
+            checkPhone--;
+        }
+        if (param.getPhoneNumber()!=xPhone&&checkPhone>0) {
             return Msg.fail().code(10001).mess("手机号已被使用");
         }
         Account ae = new Account();
@@ -108,7 +113,7 @@ public class DoctorService {
         de.setId(id);
         de.setUpdateTime(new DateTime().toDate());
         int i = doctorMapper.updateDoctor(de);
-        if (i > 0 && j > 0) {
+        if (i > 0 && j >= 0) {
             param.setPwd("");
             return Msg.success().mess("修改成功").data("updateData", param);
         }
